@@ -1,0 +1,35 @@
+{
+	"cipher":{
+		"a":"Beef (A)",
+		"ba":"Bull & Beef (BA)",
+		"v":"Veal (V)",
+		"b":"Bull (B)",
+		"ys":"Yearling Steer (YS)",
+		"y":"Yearling Beef (Y)",
+		"ygs":"Young Steer (YGS)",
+		"yg":"Young Beef (YG)",
+		"yps":"Young Prime Steer (YPS)",
+		"yp":"Young Prime Beef (YP)",
+		"prs":"Prime Steer (PRS)",
+		"pr":"Prime Beef (PR)",
+		"ss":"Steer (SS)",
+		"s":"Ox (S)",
+		"c":"Cow (C)",
+		"ye":"Yearling Entire (YE)",
+		"yge":"Young Entire (YGE)",
+		"byg":"Young Bull (BYG)"
+	},
+
+	"packaging":{
+		"iw":"Individual Wrapped (IW)",
+		"mw":"Multiple Wrapped (MW)",
+		"lp":"Layer Packed (LP)",
+		"tp":"Tray Packed (TP)",
+		"vac":"Vacuum Packed (VAC)"
+	},
+
+	"freshFrozen":{
+		"chilled":"Chilled",
+		"frozen":"Frozen"
+	}
+}

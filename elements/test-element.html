@@ -1,0 +1,24 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<dom-module id="test-element">
+    <template>
+        <style>
+            p {
+            }
+        </style>
+        <p>I'm inside test-element and coloured. I'm styled with --base-font-family (Helvetica) and --primary-color (blue)</p>
+    </template>
+    <script>
+    class TestElement extends Polymer.Element {
+        static get is() { return "test-element"; }
+        static get properties() {
+            return {
+                test: {
+                    type: Array
+                }
+            }
+        }
+    }
+    customElements.define(TestElement.is, TestElement)
+    </script>
+</dom-module>

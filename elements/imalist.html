@@ -1,0 +1,28 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<dom-module id="this-is-a-list">
+    <template>
+        <style>
+        </style>
+
+        <iron-ajax auto
+          url="https://www.reddit.com/r/cats.json"
+          handle-as="json"
+          last-response="{{redditData}}"></iron-ajax>
+        <ul>
+            <dom-repeat items="[[redditData.data.children]]" as="redditPost">
+            <template>
+                <li>[[redditPost.data.author]]</li>
+            </template>
+            </dom-repeat>
+        </ul>
+        <p>hello there</p>
+    </template>
+    <script>
+    class ThisIsAList extends Polymer.Element {
+        static get is() { return "this-is-a-list"; }
+        static get properties() {}
+    }
+    customElements.define(ThisIsAList.is, ThisIsAList)
+    </script>
+</dom-module>
