@@ -15,17 +15,17 @@
             last-response="{{redditData}}"></iron-ajax>
         <iron-ajax 
             auto
-            url="./elements/subreddits.json"
+            url="https://www.reddit.com/api/subreddits_by_topic.json?query=karma"
             handle-as="json"
             last-response="{{subredditsList}}"></iron-ajax>
-        
+
         <hr>
         
-        <paper-dropdown-menu label="Pick a subreddit">
+        <paper-dropdown-menu label="Pick a subreddit" on-iron-select="itemSelected">
             <paper-listbox class="dropdown-content">
-                <dom-repeat items="[[arrayify(subredditsList)]]">
+                <dom-repeat items="[[subredditsList]]">
                     <template>
-                        <paper-item>[[item]]</paper-item>
+                        <paper-item>[[item.name]]</paper-item>
                     </template>
                 </dom-repeat>
             </paper-listbox>
@@ -54,12 +54,11 @@
             console.log(Object.entries(obj))
             return Object.entries(obj)
         }
-        exists(obj) {
-            if (obj !== '') {
-                return true
-            } else {
-                return false
-            }
+        itemSelected(e) {
+          var selectedItem = e.target.selectedItem;
+        //   if (selectedItem) {
+            console.log("selected: " + selectedItem.innerText);
+        //   }
         }
     }
     customElements.define(ThisIsAList.is, ThisIsAList)

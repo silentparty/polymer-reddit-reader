@@ -19,6 +19,7 @@
     "iron-ajax": "PolymerElements/iron-ajax#2.0-preview",
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#2.0-preview",
     "paper-listbox": "PolymerElements/paper-listbox#2.0-preview",
-    "polymer": "Polymer/polymer#2.0.0-rc.2"
+    "polymer": "Polymer/polymer#2.0.0-rc.2",
+    "paper-item": "PolymerElements/paper-item#2.0-preview"
   }
 }
