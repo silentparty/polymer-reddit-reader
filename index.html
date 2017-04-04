@@ -29,6 +29,28 @@
             --color-secondary: red;
             --text-color: #333;
         }
+        /*Flex grid*/
+        /* https://www.taniarascia.com/easiest-flex-grid-ever/ */
+        .column {
+          flex-basis: 100%;
+        }
+        @media screen and (min-width: 600px) {
+          .row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+          }
+          .column {
+            flex: 1;
+          }
+          ._25 {
+            flex: 2.5;
+          }
+          ._50 {
+            flex: 5;
+          }
+        }
+        /*Typography*/
         body {
             font: var(--base-font-weight) var(--base-font-size)/var(--base-line-height) var(--base-font-family);
             color: pink;
