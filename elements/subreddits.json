@@ -1,0 +1,15 @@
+{
+	"feedType":"Feed Type",
+	"grade":"MSA Grade",
+	"breed":"Breed",
+	"cipher":"Cipher",
+	"freshFrozen":"Fresh or Frozen",
+	"marbleScore":"Marble Score",
+	"origin":"Origin",
+	"packaging":"Packaging",
+	"pricePerUnit":"Price per Unit",
+	"quantity":"Quantity",
+	"shippingMethod":"Shipping Method",
+	"tradeTerms":"Trade Terms",
+	"isHalal":"Halal"
+}

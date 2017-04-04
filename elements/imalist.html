@@ -13,13 +13,35 @@
             url="https://www.reddit.com/r/cats.json"
             handle-as="json"
             last-response="{{redditData}}"></iron-ajax>
+        <iron-ajax 
+            auto
+            url="./elements/subreddits.json"
+            handle-as="json"
+            last-response="{{subredditsList}}"></iron-ajax>
+        
+        <hr>
+        
+        <paper-dropdown-menu label="Pick a subreddit">
+            <paper-listbox class="dropdown-content">
+                <dom-repeat items="[[arrayify(subredditsList)]]">
+                    <template>
+                        <paper-item>[[item]]</paper-item>
+                    </template>
+                </dom-repeat>
+            </paper-listbox>
+        </paper-dropdown-menu>
+
         <ul>
             <dom-repeat items="[[redditData.data.children]]" as="redditPost">
             <template>
                 <li>
                     <ul>
                         <li><h3>[[redditPost.data.author]]</h3></li>
-                        <li><img src="[[redditPost.data.thumbnail]]" alt=""></li>
+                        <dom-if>
+                            <template>
+                                <li><img src="[[redditPost.data.thumbnail]]" alt=""></li>
+                            </template>
+                        </dom-if>
                         <li>[[redditPost.data.score]]</li>
                     </ul>
                     <hr>
@@ -32,6 +54,17 @@
     <script>
     class ThisIsAList extends Polymer.Element {
         static get is() { return "this-is-a-list"; }
+        arrayify(obj) {
+            console.log(Object.entries(obj))
+            return Object.entries(obj)
+        }
+        exists(obj) {
+            if (obj !== '') {
+                return true
+            } else {
+                return false
+            }
+        }
     }
     customElements.define(ThisIsAList.is, ThisIsAList)
     </script>
