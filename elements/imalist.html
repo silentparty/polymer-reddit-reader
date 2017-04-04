@@ -3,16 +3,27 @@
 <dom-module id="this-is-a-list">
     <template>
         <style>
+            ul li {
+                list-style-type: none;
+            }
         </style>
 
-        <iron-ajax auto
-          url="https://www.reddit.com/r/cats.json"
-          handle-as="json"
-          last-response="{{redditData}}"></iron-ajax>
+        <iron-ajax 
+            auto
+            url="https://www.reddit.com/r/cats.json"
+            handle-as="json"
+            last-response="{{redditData}}"></iron-ajax>
         <ul>
             <dom-repeat items="[[redditData.data.children]]" as="redditPost">
             <template>
-                <li>[[redditPost.data.author]]</li>
+                <li>
+                    <ul>
+                        <li><h3>[[redditPost.data.author]]</h3></li>
+                        <li><img src="[[redditPost.data.thumbnail]]" alt=""></li>
+                        <li>[[redditPost.data.score]]</li>
+                    </ul>
+                    <hr>
+                </li>
             </template>
             </dom-repeat>
         </ul>
@@ -21,7 +32,6 @@
     <script>
     class ThisIsAList extends Polymer.Element {
         static get is() { return "this-is-a-list"; }
-        static get properties() {}
     }
     customElements.define(ThisIsAList.is, ThisIsAList)
     </script>
