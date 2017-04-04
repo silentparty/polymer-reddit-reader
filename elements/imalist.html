@@ -25,7 +25,7 @@
             <paper-listbox class="dropdown-content">
                 <dom-repeat items="[[subredditsList]]">
                     <template>
-                        <paper-item>[[item.name]]</paper-item>
+                        <paper-item value="[[item.name]]">[[item.name]]</paper-item>
                     </template>
                 </dom-repeat>
             </paper-listbox>
@@ -51,14 +51,10 @@
     class ThisIsAList extends Polymer.Element {
         static get is() { return "this-is-a-list"; }
         arrayify(obj) {
-            console.log(Object.entries(obj))
             return Object.entries(obj)
         }
         itemSelected(e) {
-          var selectedItem = e.target.selectedItem;
-        //   if (selectedItem) {
-            console.log("selected: " + selectedItem.innerText);
-        //   }
+            console.log("selected: " + e.target.selectedItem.data);
         }
     }
     customElements.define(ThisIsAList.is, ThisIsAList)
