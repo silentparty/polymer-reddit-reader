@@ -1,0 +1,46 @@
+<link rel="import" href="/bower_components/polymer/polymer.html">
+
+<!--Custom components-->
+<link rel="import" href="../styles/shared-styles.html">
+<link rel="import" href="/elements/test-element.html">
+<link rel="import" href="/elements/imalist.html">
+<!--Bower Components-->
+<link rel="import" href="/bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="/bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="/bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="/bower_components/paper-item/paper-item.html">
+<link rel="import" href="/bower_components/iron-image/iron-image.html">
+<link rel="import" href="/bower_components/paper-spinner/paper-spinner-lite.html">
+<link rel="import" href="/bower_components/app-route/app-route.html">
+
+<dom-module id="my-app">
+    <template>
+
+        <!--
+          app-location and app-route elements provide the state of the URL for the app.
+        -->
+        <app-location route="{{route}}"></app-location>
+        <app-route
+            route="{{route}}"
+            pattern="/:page"
+            data="{{routeData}}"
+            tail="{{subroute}}"></app-route>
+
+        <style include="shared-styles">
+        </style>
+
+        <h1>Marcel's shitty Polymer 2.0 playground</h1>
+        <test-element></test-element>
+        <this-is-a-list></this-is-a-list>
+
+    </template>
+    
+    <script>
+    class MyApp extends Polymer.Element {
+        static get is() { return "my-app"; }
+
+    }
+    customElements.define(MyApp.is, MyApp)
+    </script>
+    
+</dom-module>
