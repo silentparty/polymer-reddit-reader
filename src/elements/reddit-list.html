@@ -1,6 +1,6 @@
 <link rel="import" href="/bower_components/polymer/polymer.html">
 
-<dom-module id="this-is-a-list">
+<dom-module id="reddit-list">
     <template>
         <style>
             ul li {
@@ -53,8 +53,8 @@
         <p>hello there</p>
     </template>
     <script>
-    class ThisIsAList extends Polymer.Element {
-        static get is() { return "this-is-a-list"; }
+    class RedditList extends Polymer.Element {
+        static get is() { return "reddit-list"; }
         arrayify(obj) {
             return Object.entries(obj)
         }
@@ -72,6 +72,6 @@
             return 'http://www.reddit.com/r/'+subreddit+'.json'
         }
     }
-    customElements.define(ThisIsAList.is, ThisIsAList)
+    customElements.define(RedditList.is, RedditList)
     </script>
 </dom-module>
