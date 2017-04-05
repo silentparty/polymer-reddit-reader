@@ -10,34 +10,39 @@
 
         <iron-ajax 
             auto
-            url="https://www.reddit.com/r/cats.json"
+            url="[[getUrl(selectedSubreddit)]]"
             handle-as="json"
-            last-response="{{redditData}}"></iron-ajax>
+            last-response="{{redditData}}"
+            ></iron-ajax>
         <iron-ajax 
             auto
             url="https://www.reddit.com/api/subreddits_by_topic.json?query=karma"
             handle-as="json"
-            last-response="{{subredditsList}}"></iron-ajax>
+            last-response="{{subredditsList}}"
+            loading="{{subredditsLoading}}"
+            ></iron-ajax>
 
         <hr>
-        
+        <h1>[[selectedSubreddit]]</h1>
+        <paper-spinner-lite active="[[subredditsLoading]]"></paper-spinner-lite>
         <paper-dropdown-menu label="Pick a subreddit" on-iron-select="itemSelected">
-            <paper-listbox class="dropdown-content">
+            <paper-listbox class="dropdown-content" selected="{{selectedSubreddit}}" attr-for-selected="name">
                 <dom-repeat items="[[subredditsList]]">
                     <template>
-                        <paper-item value="[[item.name]]">[[item.name]]</paper-item>
+                        <paper-item name="[[item.name]]">[[item.name]]</paper-item>
                     </template>
                 </dom-repeat>
             </paper-listbox>
         </paper-dropdown-menu>
-
+        
         <ul>
             <dom-repeat items="[[redditData.data.children]]" as="redditPost">
             <template>
                 <li>
                     <ul>
-                        <li><h3>[[redditPost.data.author]]</h3></li>
-                        <li><img src="[[redditPost.data.thumbnail]]" alt=""></li>
+                        <li><p>[[redditPost.data.author]]</p></li>
+                        <li><h3>[[redditPost.data.title]]</h3></li>
+                        <li><iron-image style="width:400px; height:400px;" sizing="cover" src="[[arrayItem(redditPost.data.preview.images, 0)]]"></iron-image></li>
                         <li>[[redditPost.data.score]]</li>
                     </ul>
                     <hr>
@@ -54,7 +59,17 @@
             return Object.entries(obj)
         }
         itemSelected(e) {
-            console.log("selected: " + e.target.selectedItem.data);
+            console.log("selected: " + e.target.selectedItem.name);
+        }
+        arrayItem(array, index) {
+            if (array == undefined) {
+                return '../media/reddit-logo.png'
+            } else {
+                return array[index].source.url
+            }
+        }
+        getUrl(subreddit){
+            return 'http://www.reddit.com/r/'+subreddit+'.json'
         }
     }
     customElements.define(ThisIsAList.is, ThisIsAList)

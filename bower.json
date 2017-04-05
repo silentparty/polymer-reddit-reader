@@ -20,6 +20,8 @@
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#2.0-preview",
     "paper-listbox": "PolymerElements/paper-listbox#2.0-preview",
     "polymer": "Polymer/polymer#2.0.0-rc.2",
-    "paper-item": "PolymerElements/paper-item#2.0-preview"
+    "paper-item": "PolymerElements/paper-item#2.0-preview",
+    "paper-spinner": "PolymerElements/paper-spinner#2.0-preview",
+    "iron-image": "PolymerElements/iron-image#2.0-preview"
   }
 }
