@@ -11,6 +11,7 @@
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../../bower_components/iron-image/iron-image.html">
 <link rel="import" href="../../bower_components/paper-spinner/paper-spinner-lite.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <!--Views-->
@@ -23,24 +24,58 @@
         <style include="shared-styles">
         </style>
 
+        <h1>Readit</h1>
+
         <!--
           app-location and app-route elements provide the state of the URL for the app.
         -->
         <app-location route="{{route}}"></app-location>
         <app-route
             route="{{route}}"
-            pattern="/:page"
-            data="{{routeData}}"
-            tail="{{subroute}}"></app-route>
-
-        <h1>Marcel's shitty Polymer 2.0 playground</h1>
-
+            pattern="/:view"
+            data="{{routeData}}"></app-route>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/reddit-detail">Detail page</a></li>
+        </ul>
+        
+        <iron-pages 
+            selected="[[routeData.view]]" 
+            attr-for-selected="name" 
+            fallback-selection="home">
+            <view-default name="home" route="[[route]]"></view-default>
+            <view-reddit-detail name="reddit-detail" route="[[route]]"></view-reddit-detail>
+        </iron-pages>
 
     </template>
-    
     <script>
     class MyApp extends Polymer.Element {
         static get is() { return "my-app"; }
+        static get properties() {
+            return {
+                // Properties for app-route
+                config: Object,
+                route: Object,
+                routeData: Object,
+                subRoute: Object
+            }
+        }
+        static get observers() { return [
+            '_viewChanged(routeData.view)',
+            '_routeChanged(route.*)'
+        ]}
+        _viewChanged(view) {
+            // if (routeData) {
+                console.log('View changed:' + view)
+            // }
+        }
+        _routeChanged(changeRecord) {
+            console.log(changeRecord)
+          if (changeRecord.path === 'route') {
+            console.log('Path changed');
+          }
+        }
+        
     }
     customElements.define(MyApp.is, MyApp)
     </script>

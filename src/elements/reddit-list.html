@@ -8,6 +8,12 @@
             }
         </style>
 
+        <app-route
+            route="{{route}}"
+            pattern="/:view"
+            data="{{routeData}}"
+            tail="{{subroute}}"></app-route>
+
         <iron-ajax 
             auto
             url="[[getUrl(selectedSubreddit)]]"
@@ -41,7 +47,7 @@
                 <li>
                     <ul>
                         <li><p>[[redditPost.data.author]]</p></li>
-                        <li><h3>[[redditPost.data.title]]</h3></li>
+                        <li><a href="/reddit-detail/[[redditPost.data.id]]"><h3>[[redditPost.data.title]]</h3></a></li>
                         <li><iron-image style="width:400px; height:400px;" sizing="cover" src="[[arrayItem(redditPost.data.preview.images, 0)]]"></iron-image></li>
                         <li>[[redditPost.data.score]]</li>
                     </ul>
@@ -50,7 +56,6 @@
             </template>
             </dom-repeat>
         </ul>
-        <p>hello there</p>
     </template>
     <script>
     class RedditList extends Polymer.Element {
@@ -70,6 +75,9 @@
         }
         getUrl(subreddit){
             return 'http://www.reddit.com/r/'+subreddit+'.json'
+        }
+        hyphenate(obj) {
+            return obj.replace(/(?!\[^.]+$)\.|[^\w.]+/g, '-').toLowerCase()
         }
     }
     customElements.define(RedditList.is, RedditList)

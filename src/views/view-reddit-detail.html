@@ -1,19 +1,42 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<dom-module id="reddit-detail">
+<dom-module id="view-reddit-detail">
     <template>
     
         <style>
         </style>
 
+        <app-route
+            route="{{route}}"
+            route-active="{{active}}"
+            pattern="/reddit-detail/:postId"
+            data="{{routeData}}"
+            tail="{{subroute}}"></app-route>
+
+        <iron-ajax 
+            auto="[[active]]"
+            url="[[getUrl(selectedSubreddit)]]"
+            handle-as="json"
+            last-response="{{redditData}}"
+        ></iron-ajax>
+
+        <h1>[[postTitle]]</h1>
+        <p>[[postBody]]</p>
+
     </template>
     
     <script>
-    class RedditDetail extends Polymer.Element {
-        static get is() { return "reddit-detail"; }
-
+    class ViewRedditDetail extends Polymer.Element {
+        static get is() { return "view-reddit-detail"; }
+        static get properties() {
+            return {
+                postImages: Array,
+                postTitle: String,
+                postBody: String
+            }
+        }
     }
-    customElements.define(RedditDetail.is, RedditDetail)
+    customElements.define(ViewRedditDetail.is, ViewRedditDetail)
     </script>
     
 </dom-module>
