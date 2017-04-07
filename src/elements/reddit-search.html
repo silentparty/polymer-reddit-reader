@@ -1,0 +1,70 @@
+<dom-module id="reddit-search">
+    <template>
+    
+        <style include="shared-styles">
+        </style>
+
+        <iron-ajax 
+            auto
+            url="https://www.reddit.com/api/subreddits_by_topic.json?query=[[searchValue]]"
+            handle-as="json"
+            loading="{{redditQueryloading}}"
+            last-response="{{redditData}}"
+            on-response="handleResponse"
+            debounce-duration="500"
+            ></iron-ajax>
+
+        <paper-spinner-lite active=[[redditQueryloading]]></paper-spinner-lite>
+        <paper-input label="Search for a subreddit by topic" value="{{searchValue}}"></paper-input>
+        <!--<paper-button raised class="primary on-tap="_searchIt">Search</paper-button>-->
+
+        <dom-if if="{{noResultsMessage(redditData)}}">
+            <template>
+                <p>There are no results for your query "[[searchValue]]"</p>
+            </template>
+        </dom-if>
+        <dom-repeat items="[[redditData]]" as="subRedditListItem">
+            <template>
+                    <ul>
+                        <li>
+                            <ul>
+                                <li><a href="https://reddit.com[[subRedditListItem.path]]" target="_blank">[[subRedditListItem.name]]</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+            </template>
+        </dom-repeat>
+
+
+    </template>
+    
+    <script>
+    class RedditSearch extends Polymer.Element {
+        static get is() { return "reddit-search"; }
+        _searchIt() {
+            if (this.searchValue) {
+                console.log(this.searchValue)   
+            } else {
+                console.log('you need to type something first')
+            }
+        }
+        handleResponse(obj) {
+            console.log(obj)
+            console.log(this.redditData)
+        }
+        noResultsMessage (array) {
+            console.log('this.searchValue:', this.searchValue)
+            if (this.searchValue == undefined || this.searchValue == "") {
+                // If there's been no input, or if the input is empty, no need to show the message
+                return false
+            } else if (array === null || array.length === 0) {
+                // If the returned array is empty (no results), or null (an error), show the message
+                return true
+            }
+        }
+    }
+    customElements.define(RedditSearch.is, RedditSearch)
+    </script>
+    
+</dom-module>
+</dom-module>
