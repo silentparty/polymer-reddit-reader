@@ -18,7 +18,7 @@
         <paper-input label="Search for a subreddit by topic" value="{{searchValue}}"></paper-input>
         <!--<paper-button raised class="primary on-tap="_searchIt">Search</paper-button>-->
 
-        <dom-if if="{{noResultsMessage(redditData)}}">
+        <dom-if if="[[noResultsMessage(redditData)]]">
             <template>
                 <p>There are no results for your query "[[searchValue]]"</p>
             </template>
@@ -53,14 +53,26 @@
             console.log(this.redditData)
         }
         noResultsMessage (array) {
-            console.log('this.searchValue:', this.searchValue)
-            if (this.searchValue == undefined || this.searchValue == "") {
-                // If there's been no input, or if the input is empty, no need to show the message
-                return false
-            } else if (array === null || array.length === 0) {
-                // If the returned array is empty (no results), or null (an error), show the message
-                return true
-            }
+            // Will always return a value
+            return (this.searchValue || '').length && !(array || []).length
+
+            // const hasValue = this.searchValue != undefined && this.searchValue != ""
+            // const notHasResults = array === null || array.length === 0
+
+            // if (hasValue && notHasResults) {
+            //     // If the returned array is empty (no results), or null (an error), show the message
+            //     return true
+            // }
+
+            // return false
+
+            // if (this.searchValue == undefined || this.searchValue == "") {
+            //     // If there's been no input, or if the input is empty, no need to show the message
+            //     return false
+            // } else if (array === null || array.length === 0) {
+            //     // If the returned array is empty (no results), or null (an error), show the message
+            //     return true
+            // }
         }
     }
     customElements.define(RedditSearch.is, RedditSearch)
