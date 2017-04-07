@@ -3,25 +3,31 @@
 <dom-module id="view-reddit-detail">
     <template>
     
-        <style>
+        <style include="shared-styles">
         </style>
 
         <app-route
             route="{{route}}"
-            route-active="{{active}}"
+            active="{{active}}"
             pattern="/reddit-detail/:postId"
             data="{{routeData}}"
             tail="{{subroute}}"></app-route>
 
         <iron-ajax 
             auto="[[active]]"
-            url="[[getUrl(selectedSubreddit)]]"
+            url="https://api.reddit.com/by_id/[[routeData.postId]]"
             handle-as="json"
-            last-response="{{redditData}}"
+            on-response="handleResponse"
+            last-response="{{redditPostData}}"
         ></iron-ajax>
 
-        <h1>[[postTitle]]</h1>
-        <p>[[postBody]]</p>
+        <h2>[[redditPostData.data.children.0.data.title]]</h2>
+        <p>[[redditPostData.data.children.0.data.selftext]]</p>
+        <dom-repeat items="[[redditPostData.data.children.0.data.preview.images]]" as="image">
+            <template>
+                <iron-image src="[[image.source.url]]"></iron-image>
+            </template>
+        </dom-repeat>
 
     </template>
     
@@ -30,10 +36,28 @@
         static get is() { return "view-reddit-detail"; }
         static get properties() {
             return {
-                postImages: Array,
-                postTitle: String,
-                postBody: String
+                // Properties for app-route
+                config: Object,
+                route: Object,
+                routeData: Object
             }
+        }
+        static get observers() { return [
+            '_viewChanged(routeData.postId)'
+        ]}
+        _viewChanged(view) {
+            // if (routeData) {
+                // console.log('View changed in reddit stuff:', view)
+            // }
+        }
+        arrayItem(array, index, tail) {
+            return 
+        }
+        handleResponse (obj) {
+            console.log('iron-ajax functioning')
+        }
+        logIt(obj) {
+            console.log(obj);
         }
     }
     customElements.define(ViewRedditDetail.is, ViewRedditDetail)

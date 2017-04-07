@@ -2,7 +2,7 @@
 
 <dom-module id="reddit-list">
     <template>
-        <style>
+        <style include="shared-styles">
             ul li {
                 list-style-type: none;
             }
@@ -29,7 +29,9 @@
             ></iron-ajax>
 
         <hr>
-        <h1>[[selectedSubreddit]]</h1>
+        <paper-input label="Search for a Subreddit by topic"></paper-input>
+
+        <h2>[[selectedSubreddit]]</h2>
         <paper-spinner-lite active="[[subredditsLoading]]"></paper-spinner-lite>
         <paper-dropdown-menu label="Pick a subreddit" on-iron-select="itemSelected">
             <paper-listbox class="dropdown-content" selected="{{selectedSubreddit}}" attr-for-selected="name">
@@ -47,7 +49,8 @@
                 <li>
                     <ul>
                         <li><p>[[redditPost.data.author]]</p></li>
-                        <li><a href="/reddit-detail/[[redditPost.data.id]]"><h3>[[redditPost.data.title]]</h3></a></li>
+                        <li><a href="/reddit-detail/[[redditPost.kind]]_[[redditPost.data.id]]"><h3>[[redditPost.data.title]]</h3></a></li>
+                        <!--TODO: Remove that crappy array function-->
                         <li><iron-image style="width:400px; height:400px;" sizing="cover" src="[[arrayItem(redditPost.data.preview.images, 0)]]"></iron-image></li>
                         <li>[[redditPost.data.score]]</li>
                     </ul>
@@ -74,7 +77,7 @@
             }
         }
         getUrl(subreddit){
-            return 'http://www.reddit.com/r/'+subreddit+'.json'
+            return `https://api.reddit.com/r/${subreddit}?limit=20`
         }
         hyphenate(obj) {
             return obj.replace(/(?!\[^.]+$)\.|[^\w.]+/g, '-').toLowerCase()

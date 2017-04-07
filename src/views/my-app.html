@@ -14,6 +14,7 @@
 <link rel="import" href="../../bower_components/app-route/app-location.html">
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <!--Views-->
 <link rel="import" href="view-default.html">
 <link rel="import" href="view-reddit-detail.html">
@@ -22,9 +23,11 @@
     <template>
 
         <style include="shared-styles">
+            #app-title a {
+                color: inherit;
+                text-decoration: none;
+            }            
         </style>
-
-        <h1>Readit</h1>
 
         <!--
           app-location and app-route elements provide the state of the URL for the app.
@@ -34,11 +37,9 @@
             route="{{route}}"
             pattern="/:view"
             data="{{routeData}}"></app-route>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/reddit-detail">Detail page</a></li>
-        </ul>
         
+        <h1 id="app-title"><a href="/">Readit</a></h1>
+
         <iron-pages 
             selected="[[routeData.view]]" 
             attr-for-selected="name" 
