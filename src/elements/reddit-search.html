@@ -25,13 +25,9 @@
         </dom-if>
         <dom-repeat items="[[redditData]]" as="subRedditListItem">
             <template>
-                    <ul>
-                        <li>
-                            <ul>
-                                <li><a href="https://reddit.com[[subRedditListItem.path]]" target="_blank">[[subRedditListItem.name]]</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                <ul>
+                    <li><a href="https://reddit.com[[subRedditListItem.path]]" target="_blank">[[subRedditListItem.name]]</a></li>
+                </ul>
             </template>
         </dom-repeat>
 
